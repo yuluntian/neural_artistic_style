@@ -18,7 +18,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--learning_rate',
       type=float,
-      default=1.0,
+      default=1e1,
       help='Initial learning rate.'
   )
   parser.add_argument(
@@ -42,25 +42,25 @@ if __name__ == '__main__':
   parser.add_argument(
       '--alpha',
       type=float,
-      default=1e-1,
+      default=1e-3,
       help='Content loss weight.'
   )
   parser.add_argument(
       '--beta',
       type=float,
-      default=1e1,
+      default=1e-1,
       help='Style loss weight.'
   )
   parser.add_argument(
       '--gamma',
       type=float,
-      default=1e0,
+      default=1e-1,
       help='Noise loss weight.'
   )
   parser.add_argument(
       '--content_input',
       type=str,
-      default='./contents/point_reyes_in_fog.jpg',
+      default='./contents/germany.jpg',
       help='Path to input content image'
   )
   parser.add_argument(
@@ -95,6 +95,16 @@ if __name__ == '__main__':
   )
   
   FLAGS, unparsed = parser.parse_known_args()
+
+  if not tf.gfile.Exists(FLAGS.model):
+  	print('Model not found: ' + str(FLAGS.model))
+  	print('Please make sure you have downloaded the model before running this program.')
+
+  if FLAGS.checkpoint is None and tf.gfile.Exists(FLAGS.log_dir):
+  	tf.gfile.DeleteRecursively(FLAGS.log_dir)
+
+  if FLAGS.checkpoint is None and tf.gfile.Exists(FLAGS.output_dir):
+  	tf.gfile.DeleteRecursively(FLAGS.output_dir)
 
   if not tf.gfile.Exists(FLAGS.log_dir):
   	tf.gfile.MakeDirs(FLAGS.log_dir)
