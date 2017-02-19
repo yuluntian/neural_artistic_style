@@ -18,8 +18,8 @@ class vgg16:
         self.convlayers()
 
     def inputlayer(self, img, train):
-        self.img_width = img.shape[0]
-        self.img_height = img.shape[1]
+        self.img_height = img.shape[0]
+        self.img_width = img.shape[1]
         img = np.asarray([img], dtype='float32')
         with tf.name_scope('input') as scope:
             self.img = tf.Variable(img, name='image',trainable=train)
@@ -219,9 +219,8 @@ class vgg16:
         grams = []
         for layer in layers:
             # Compute the gram matrix
-            vectorized = tf.reshape(layer, [-1, layer.get_shape()[-1].value])            
-            weight = tf.constant(2 * vectorized.get_shape()[0].value * vectorized.get_shape()[1].value, dtype=tf.float32)
-            g = tf.matmul(tf.transpose(vectorized),vectorized) / weight
+            vectorized = tf.reshape(layer, [-1, layer.get_shape()[-1].value])
+            g = tf.matmul(tf.transpose(vectorized),vectorized)/(2*tf.size(vectorized, out_type=tf.float32))
 
             # Flatten the gram matrix into a vector
             grams.append(tf.reshape(g, [-1]))
@@ -230,13 +229,14 @@ class vgg16:
         return tf.concat(axis=0, values=grams)
 
     def content_loss(self, target):
-        return tf.reduce_mean(tf.square(self.content_response()-target))
+        return tf.nn.l2_loss(self.content_response()-target)/tf.size(target, out_type=tf.float32) 
 
     def style_loss(self, target):
-        return tf.reduce_mean(tf.square(self.style_response()-target))
+        return tf.nn.l2_loss(self.style_response()-target)/tf.size(target, out_type=tf.float32) 
 
     def noise_loss(self):
-        return tf.reduce_mean(tf.square(self.img[:,1:,:,:] - self.img[:,:self.img_width-1,:,:])) + tf.reduce_mean(tf.square(self.img[:,:,1:,:] - self.img[:,:,:self.img_height-1,:]))
+        return tf.nn.l2_loss(self.img[:,1:,:,:] - self.img[:,:self.img_height-1,:,:])/tf.size(self.img[:,1:,:,:], out_type=tf.float32)
+        + tf.nn.l2_loss(self.img[:,:,1:,:] - self.img[:,:,:self.img_width-1,:])/tf.size(self.img[:,:,1:,:], out_type=tf.float32)
 
     def training(self, loss, learning_rate):
         assert self.train == True
