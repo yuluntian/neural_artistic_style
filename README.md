@@ -1,6 +1,6 @@
 # Neural Artistic Style Implementation in TensorFlow
 
-![](./presentations/illustration.png =500x)
+![Alt](./presentations/illustration.png "Neural Artistic Style Illustration")
 (from "*A Neural Algorithm of Artistic Style*", Gatys et al. 2015)
 
 By Yulun Tian [http://yuluntian.wixsite.com/yuluntian]
