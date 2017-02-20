@@ -20,5 +20,5 @@ def open_image(img_file, shape=None, mode='RGB'):
   	img = imresize(img, shape)
   return img
 
-def save_image(img_file, img, format='png'):
+def save_image(img_file, img, format='JPEG'):
   imsave(name=img_file, arr=img, format=format)

@@ -5,7 +5,7 @@
 ########################################################################################
 
 
-
+import sys
 import argparse
 import tensorflow as tf
 from train import train
@@ -48,7 +48,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--beta',
       type=float,
-      default=1e-1,
+      default=1e0,
       help='Style loss weight.'
   )
   parser.add_argument(
@@ -60,7 +60,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--content_input',
       type=str,
-      default='./contents/germany.jpg',
+      default='./contents/point_reyes.jpg',
       help='Path to input content image'
   )
   parser.add_argument(
@@ -99,6 +99,7 @@ if __name__ == '__main__':
   if not tf.gfile.Exists(FLAGS.model):
   	print('Model not found: ' + str(FLAGS.model))
   	print('Please make sure you have downloaded the model before running this program.')
+  	sys.exit(0)
 
   if FLAGS.checkpoint is None and tf.gfile.Exists(FLAGS.log_dir):
   	tf.gfile.DeleteRecursively(FLAGS.log_dir)

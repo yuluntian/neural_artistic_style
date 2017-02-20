@@ -14,7 +14,7 @@ import os.path
 
 def train(FLAGS):
 
-  shape = (FLAGS.image_width, FLAGS.image_height)
+  shape = (FLAGS.image_height, FLAGS.image_width)
 
   content_img, style_img = utils.open_image(FLAGS.content_input, shape=shape), utils.open_image(FLAGS.style_input, shape=shape)
 
@@ -44,7 +44,7 @@ def train(FLAGS):
     
     
 
-    print('Begin training on ' + str(shape) + ' image...')
+    print('Begin training on ' + str((FLAGS.image_width, FLAGS.image_height)) + ' image...')
 
     vgg = vgg16(img=utils.white_noise(shape=shape+(3,)), train=True)
 
@@ -64,12 +64,14 @@ def train(FLAGS):
     for step in range(FLAGS.max_steps):
       start_time = time.time()
 
-      _, loss_value= sess.run([train_op, loss])
-      
+      sess.run(train_op)
+
       duration = time.time() - start_time
 
       # Print status to stdout.
-      print('Step %d: loss = %.2f (%.3f sec)' % (step, loss_value, duration))
+      if step % 20 == 0 or (step + 1) == FLAGS.max_steps:
+        loss_value, content_loss, style_loss, noise_loss = sess.run([loss, vgg.content_loss(content_target), vgg.style_loss(style_target), vgg.noise_loss()])
+        print('Step %d: %.3f sec \n total_loss = %.3e \n content_loss = %.3e \n style_loss = %.3e \n noise_loss = %.3e' % (step, duration, loss_value, FLAGS.alpha*content_loss, FLAGS.beta*style_loss, FLAGS.gamma*noise_loss))
 
       if (step + 1) % 100 == 0 or (step + 1) == FLAGS.max_steps:
         vgg.adjust()
