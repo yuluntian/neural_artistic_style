@@ -6,6 +6,8 @@ By Yulun Tian [http://yuluntian.wixsite.com/yuluntian]
 
 (Illustration from "*A Neural Algorithm of Artistic Style*", Gatys et al. 2015)
 
+Video demonstration [https://youtu.be/KvL2OuCClUY]
+
 ## Introduction
 This project replicates the results in "*A Neural Algorithm of Artistic Style*", Gatys et al. 2015. A neural network is trained to create new artistic images by recombining styles and contents from different images. Total variation denoising is also integrated to ensure the output image is visually coherent.
 
