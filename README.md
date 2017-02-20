@@ -2,7 +2,8 @@
 
 By Yulun Tian [http://yuluntian.wixsite.com/yuluntian]
 
-![Alt](./presentations/illustration.png "Neural Artistic Style Illustration")
+<img src="./presentations/illustration.png" width="500">
+
 (Illustration from "*A Neural Algorithm of Artistic Style*", Gatys et al. 2015)
 
 ## Introduction
