@@ -1,9 +1,9 @@
 # Neural Artistic Style Implementation in TensorFlow
 
-![Alt](./presentations/illustration.png "Neural Artistic Style Illustration")
-(from "*A Neural Algorithm of Artistic Style*", Gatys et al. 2015)
-
 By Yulun Tian [http://yuluntian.wixsite.com/yuluntian]
+
+![Alt](./presentations/illustration.png "Neural Artistic Style Illustration")
+(Illustration from "*A Neural Algorithm of Artistic Style*", Gatys et al. 2015)
 
 ## Introduction
 This project replicates the results in "*A Neural Algorithm of Artistic Style*", Gatys et al. 2015. A neural network is trained to create new artistic images by recombining styles and contents from different images. Total variation denoising is also integrated to ensure the output image is visually coherent.
