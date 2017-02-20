@@ -60,7 +60,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--content_input',
       type=str,
-      default='./contents/point_reyes.jpg',
+      default='./contents/point_reyes_in_fog.jpg',
       help='Path to input content image'
   )
   parser.add_argument(
