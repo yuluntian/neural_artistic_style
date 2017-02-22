@@ -16,7 +16,7 @@ The original paper can be accessed here: [https://arxiv.org/abs/1508.06576]
 The neural network used in this project is based on a VGG16 model pre-trained on ImageNet. The model is kindly provided by Davi Frossard: [https://www.cs.toronto.edu/~frossard/post/vgg16/]
 
 ## Run this project
-To run this project, first ensure you have [TensorFlow](https://www.tensorflow.org/install/) installed.
+To run this project, make sure you have [TensorFlow](https://www.tensorflow.org/install/) installed. This project is currently compatible with TensorFlow 1.0.
 
 Also, download the pre-trained VGG 16 model using this [link](https://www.cs.toronto.edu/~frossard/vgg16/vgg16_weights.npz), and place the downloaded *vgg16_weights.npz* file under *vgg16/models/*.
 
